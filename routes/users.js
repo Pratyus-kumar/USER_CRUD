@@ -11,6 +11,16 @@ router.get('/', async(req,res) => {
     }
 })
 
+
+router.get('/:id', async(req,res) => {
+    try{
+    const user1=  await user.findById(req.params.id)
+    res.json(user1)
+    }catch(err){
+        res.send('Error ' + err)
+    }
+})
+
 router.post('/',async(req,res) =>{
     const user1 = new user({
     name: req.body.name,
@@ -23,5 +33,16 @@ router.post('/',async(req,res) =>{
    }catch(err){
     res.send('error')
    }
+})
+
+router.patch('/:id',async(req,res)=>{
+    try{
+     const user1 = await user.findById(req.params.id)
+     user1.sub = req.body.sub
+     const a1 = await user1.save()
+     res.json(a1)
+    }catch(err){
+        res.send('Error')
+    }
 })
 module.exports = router
