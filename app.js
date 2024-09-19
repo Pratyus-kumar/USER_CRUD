@@ -11,6 +11,9 @@ const con = mongoose.connection
 con.on('open',() => {
     console.log('connected...')
 })
+
+app.use(express.json())
+
 const userRouter = require('./routes/users')
 app.use('/users',userRouter)
 
